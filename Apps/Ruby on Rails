@@ -1,0 +1,4 @@
+# Ruby on Rails
+
+## Exploit
+   - Testing a Ruby on Rails App & noticed an HTTP parameter containing a URL? Developers sometimes use "Kernel#open" function to access URLs == Game Over. Just send a pipe as the first character and then a shell command (Command Injection by design)
