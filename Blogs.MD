@@ -1,0 +1,62 @@
+
+Auth0 Auth Bypass - https://medium.com/@cintainfinita/knocking-down-the-big-door-8e2177f76ea5
+
+Some Cool File Upload Bypass Tricks @ - https://mike-n1.github.io/
+
+Safari Based XSS - https://bo0om.ru/safari-client-side
+
+[iOS Static Analysis and Recon – SecDevOps](https://secdevops.ai/ios-static-analysis-and-recon-c611eaa6d108)
+
+[Bypassing NGFW/WAFs using data format obfuscations – Ivan Novikov – Medium](https://medium.com/@d0znpp/bypassing-ngfw-wafs-using-data-format-obfuscations-188351ea9e73)
+
+[PHP SSRF Techniques – secjuice™ – Medium](https://medium.com/secjuice/php-ssrf-techniques-9d422cb28d51)
+
+[Linux · Security - My notepad](https://xapax.gitbooks.io/security/content/linux.html)
+
+[PHP : Winning the race against PHP (alternative way to easy_php @ N1CTF2018)](http://dann.com.br/php-winning-the-race-condition-vs-temporary-file-upload-alternative-way-to-easy_php-n1ctf2018/)
+
+[Fuzzing JSON Web Services](https://secapps.com/blog/2018/03/fuzzing-json-web-services)
+
+[Bypassing Payments Using Webhooks | Lightning Security](https://lightningsecurity.io/blog/bypassing-payments-using-webhooks/)
+
+[](http://www.cheat-sheets.org/saved-copy/ssiqr.pdf)
+
+[GitHub - caffix/amass: Subdomain Enumeration in Go](https://github.com/caffix/amass)
+
+Watch Ippsec
+
+[GraphQL abuse: Bypass account level permissions through parameter smuggling](https://labs.detectify.com/2018/03/14/graphql-abuse/)
+
+[https://staaldraad.github.io/post/2018-03-16-quick-win-with-graphql/](https://t.co/WJQm0K0ShO)
+
+[Jwt == insecurity?](https://www.slideshare.net/snyff/jwt-insecurity)
+
+[Prevent bypassing of SSL certificate pinning in iOS applications | GuardSquare](https://www.guardsquare.com/en/blog/iOS-SSL-certificate-pinning-bypassing)
+
+[Snapchat [10.23.7.0] for Android | High-Tech Bridge](https://www.htbridge.com/mobile/?id=JebdfnGU)
+
+[Skeleton Scribe](https://www.skeletonscribe.net/)
+
+[Cross-Protocol Request Forgery] https://www.nccgroup.trust/globalassets/our-research/us/whitepapers/2018/cprf.pdf
+
+[XSS in Yahoo Subdomain - Mohamed Haron Elhosseny](http://www.mohamedharon.com/2018/03/xss-in-subdomain-httpsyefgrantsyahoocom.html)
+
+[No RCE? Then SSH to the box!](http://blog.jr0ch17.com/2018/No-RCE-then-SSH-to-the-box/)
+
+[HackerOne RCE through native app browser](https://hackerone.com/reports/301458)
+
+[CTFtime.org / Writeups](https://ctftime.org/writeups)
+
+[DOM-based XSS - The 3 Sinks - Brute XSS](https://brutelogic.com.br/blog/dom-based-xss-the-3-sinks/)
+
+[Bypass CSP by Abusing XSS Filter in Edge – InfoSec Writeups – Medium](https://medium.com/bugbountywriteup/bypass-csp-by-abusing-xss-filter-in-edge-43e9106a9754)
+
+[YouTube](https://www.youtube.com/watch?v=ZaOtY4i5w_U)
+
+[Learn What is Content Security and How to Implement Best Preactices](https://blog.sucuri.net/2018/04/content-security-policy.html)
+
+[Pentesting obfuscated Android App – Tinyhack.com](http://tinyhack.com/2018/02/05/pentesting-obfuscated-android-app/)
+
+[Bug Bounty & Android Applications - Part 1 · Martijn - X1M](https://x1m.nl/posts/android-app-testing-part-1/)
+
+[Hacking JWT(JSON Web Token) - dlive - 博客园](http://www.cnblogs.com/dliv3/p/7450057.html)
