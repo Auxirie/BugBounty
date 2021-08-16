@@ -13,3 +13,8 @@
    - Analyze Token
    - Check for validated header like referrer, Origin,user-agent
    - CSRF via CSS injection and CRLF Injection
+   - Put and Delete method csrf
+     1. “_method” parameter.
+Some frameworks have enabled _method by default even it’s not necessary to execute the Request
+(Simply change the PUT and DELETE to POST and pass them in _method
+     2. framework laravel,Django,rr version
