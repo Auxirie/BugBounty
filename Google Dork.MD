@@ -9,3 +9,7 @@
    - site:target.tld ext:wsdl
    - user filetype:wadl
    - user filetype:wsdl
+
+## Information Disclosure 
+   - site:http://target.com intitle:index.of
+   - 
