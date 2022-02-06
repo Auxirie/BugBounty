@@ -1,5 +1,7 @@
 # BugBounty
 
+# Made by Auxirie
+
 ## Thank's for all this great researcher over the world
 
    - https://github.com/ajdumanhug/awesome-bug-bounty-tips
